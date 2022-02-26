@@ -56,8 +56,8 @@ const Index = () => {
     <Main
       meta={
         <Meta
-          title="Genshin Impact Achievement Generator"
-          description="Generate custom achievements of Genshin Impact"
+          title="Pembuat Achievement Genshin Impact"
+          description="Buat achievement genshin pribadimu!"
         />
       }
     >
