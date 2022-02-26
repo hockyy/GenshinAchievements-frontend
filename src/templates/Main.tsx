@@ -12,7 +12,7 @@ type IMainProps = {
 
 const Main = (props: IMainProps) => {
   return (
-    <div className="px-1 w-full antialiased text-gray-700">
+    <div className="px-4 w-full antialiased text-gray-700">
       {props.meta}
 
       <div className="mx-auto max-w-screen-md">
@@ -28,6 +28,22 @@ const Main = (props: IMainProps) => {
         </div>
 
         <div className="py-5 text-xl content">{props.children}</div>
+        <div className="py-3 text-sm text-center border-t border-gray-300">
+          <div className="text-sm">Biaya server tidak gratis 😢.</div>
+          <div className="text-sm">
+            Bantu{' '}
+            <b className={'text-[#9f8468]'}>
+              <a color={'#D02D23'} href="https://trakteer.id/hocky">
+                → donasi ←
+              </a>
+            </b>{' '}
+            agar{' '}
+            <a color={'#D02D23'} href="https://hocky.id">
+              Hocky 🍁
+            </a>{' '}
+            bisa <i className={'line-through'}>hedon</i> lanjut berkarya!
+          </div>
+        </div>
 
         <div className="py-3 text-sm text-center border-t border-gray-300">
           © Hak Cipta {new Date().getFullYear()}{' '}
