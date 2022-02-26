@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import {
+  Badge,
+  Box,
   Button,
   Center,
   FormControl,
@@ -11,9 +13,11 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
+import HTMLReactParser from 'html-react-parser';
 
 import { Meta } from '@/layout/Meta';
 import { Main } from '@/templates/Main';
+import { Tips } from '@/utils/Tips';
 
 const Index = () => {
   const TITLE_COLOR = '#9f8468';
@@ -52,6 +56,18 @@ const Index = () => {
         return `https://blog.hocky.id/assets/images/felix-sad.gif`;
       });
   };
+
+  const [newTips, setnewTips] = useState(0);
+
+  const changeTips = useCallback(() => {
+    setnewTips((newTips + 1) % Tips.length);
+  }, [newTips]);
+
+  useEffect(() => {
+    const intervalID = setInterval(changeTips, 10000);
+    return () => clearInterval(intervalID);
+  }, [changeTips]);
+
   return (
     <Main
       meta={
@@ -61,6 +77,22 @@ const Index = () => {
         />
       }
     >
+      <Center>
+        <Box
+          borderRadius={'10'}
+          p={'2'}
+          borderStyle="solid"
+          borderColor="gray.200"
+          borderWidth={'2px'}
+        >
+          <Badge borderRadius="full" px="2" colorScheme="teal">
+            Tips
+          </Badge>{' '}
+          <span className={'text-lg'}>
+            {HTMLReactParser(Tips[newTips] || 'Tips sedang mengalami galat.')}
+          </span>
+        </Box>
+      </Center>
       <Center className={'m-3'}>
         <img className={'max-h-40'} src={image} alt={'🥇 Gambar achievement'} />
       </Center>

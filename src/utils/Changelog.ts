@@ -8,7 +8,12 @@ export const Changelog = {
     {
       emoji: '🍡',
       version: '1.1.0',
-      changes: ['Menambahkan bahasa Inggris;', 'mendukung perangkat seluler.'],
+      changes: [
+        'Menambahkan bahasa Inggris;',
+        'mendukung perangkat seluler;',
+        'menambahkan kotak tips;',
+        'menambahkan informasi donasi.',
+      ],
     },
   ],
 };
