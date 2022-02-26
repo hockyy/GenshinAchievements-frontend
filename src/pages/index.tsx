@@ -1,184 +1,126 @@
-import { useRouter } from 'next/router';
+import { useState } from 'react';
+
+import {
+  Button,
+  Center,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Input,
+  Select,
+} from '@chakra-ui/react';
+import axios from 'axios';
+import { Field, Form, Formik } from 'formik';
 
 import { Meta } from '@/layout/Meta';
 import { Main } from '@/templates/Main';
 
 const Index = () => {
-  const router = useRouter();
+  const TITLE_COLOR = '#9f8468';
+  const BASE_URL_DEV = 'http://localhost:80';
+  const BASE_URL_PROD = 'https://api-genshin.hocky.id';
+  let BASE_URL = BASE_URL_PROD;
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    BASE_URL = BASE_URL_DEV;
+  }
+  const [image, setImage] = useState(`${BASE_URL}/static/dummy.png`);
 
+  const postQuery = async (values: { takarir: string; bahasa: string }) => {
+    return axios
+      .post(
+        `${BASE_URL}/genshin`,
+        {
+          caption: values.takarir,
+          language: values.bahasa,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods':
+              'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers':
+              'Origin, Content-Type, X-Auth-Token, Authorization, Accept,charset,boundary,Content-Length',
+          },
+        }
+      )
+      .then((response) => {
+        return `${BASE_URL}${response.data.url}`;
+      })
+      .catch(() => {
+        alert('Server sedang bermasalah!');
+        return `https://blog.hocky.id/assets/images/felix-sad.gif`;
+      });
+  };
   return (
     <Main
       meta={
         <Meta
-          title="Next.js Boilerplate Presentation"
-          description="Next js Boilerplate is the perfect starter code for your project. Build your React application with the Next.js framework."
+          title="Genshin Impact Achievement Generator"
+          description="Generate custom achievements of Genshin Impact"
         />
       }
     >
-      <a href="https://github.com/ixartz/Next-js-Boilerplate">
-        <img
-          src={`${router.basePath}/assets/images/nextjs-starter-banner.png`}
-          alt="Nextjs starter banner"
-        />
-      </a>
-      <h1 className="text-2xl font-bold">
-        Boilerplate code for your Nextjs project with Tailwind CSS
-      </h1>
-      <p>
-        <span role="img" aria-label="rocket">
-          🚀
-        </span>{' '}
-        Next.js Boilerplate is a starter code for your Next js project by
-        putting developer experience first .{' '}
-        <span role="img" aria-label="zap">
-          ⚡️
-        </span>{' '}
-        Made with Next.js, TypeScript, ESLint, Prettier, Husky, Lint-Staged,
-        VSCode, Netlify, PostCSS, Tailwind CSS.
-      </p>
-      <h2 className="text-lg font-semibold">Next js Boilerplate Features</h2>
-      <p>Developer experience first:</p>
-      <ul>
-        <li>
-          <span role="img" aria-label="fire">
-            🔥
-          </span>{' '}
-          <a href="https://nextjs.org" rel="nofollow">
-            Next.js
-          </a>{' '}
-          for Static Site Generator
-        </li>
-        <li>
-          <span role="img" aria-label="art">
-            🎨
-          </span>{' '}
-          Integrate with{' '}
-          <a href="https://tailwindcss.com" rel="nofollow">
-            Tailwind CSS
-          </a>
-        </li>
-        <li>
-          <span role="img" aria-label="nail_care">
-            💅
-          </span>{' '}
-          PostCSS for processing Tailwind CSS
-        </li>
-        <li>
-          <span role="img" aria-label="tada">
-            🎉
-          </span>{' '}
-          Type checking Typescript
-        </li>
-        <li>
-          <span role="img" aria-label="pencil2">
-            ✏️
-          </span>{' '}
-          Linter with{' '}
-          <a href="https://eslint.org" rel="nofollow">
-            ESLint
-          </a>
-        </li>
-        <li>
-          <span role="img" aria-label="hammer_and_wrench">
-            🛠
-          </span>{' '}
-          Code Formatter with{' '}
-          <a href="https://prettier.io" rel="nofollow">
-            Prettier
-          </a>
-        </li>
-        <li>
-          <span role="img" aria-label="fox_face">
-            🦊
-          </span>{' '}
-          Husky for Git Hooks
-        </li>
-        <li>
-          <span role="img" aria-label="no_entry_sign">
-            🚫
-          </span>{' '}
-          Lint-staged for running linters on Git staged files
-        </li>
-        <li>
-          <span role="img" aria-label="no_entry_sign">
-            🗂
-          </span>{' '}
-          VSCode configuration: Debug, Settings, Tasks and extension for
-          PostCSS, ESLint, Prettier, TypeScript
-        </li>
-        <li>
-          <span role="img" aria-label="robot">
-            🤖
-          </span>{' '}
-          SEO metadata, JSON-LD and Open Graph tags with Next SEO
-        </li>
-        <li>
-          <span role="img" aria-label="robot">
-            ⚙️
-          </span>{' '}
-          <a
-            href="https://www.npmjs.com/package/@next/bundle-analyzer"
-            rel="nofollow"
-          >
-            Bundler Analyzer
-          </a>
-        </li>
-        <li>
-          <span role="img" aria-label="rainbow">
-            🌈
-          </span>{' '}
-          Include a FREE minimalist theme
-        </li>
-        <li>
-          <span role="img" aria-label="hundred">
-            💯
-          </span>{' '}
-          Maximize lighthouse score
-        </li>
-      </ul>
-      <p>Built-in feature from Next.js:</p>
-      <ul>
-        <li>
-          <span role="img" aria-label="coffee">
-            ☕
-          </span>{' '}
-          Minify HTML &amp; CSS
-        </li>
-        <li>
-          <span role="img" aria-label="dash">
-            💨
-          </span>{' '}
-          Live reload
-        </li>
-        <li>
-          <span role="img" aria-label="white_check_mark">
-            ✅
-          </span>{' '}
-          Cache busting
-        </li>
-      </ul>
-      <h2 className="text-lg font-semibold">Our Stater code Philosophy</h2>
-      <ul>
-        <li>Minimal code</li>
-        <li>SEO-friendly</li>
-        <li>
-          <span role="img" aria-label="rocket">
-            🚀
-          </span>{' '}
-          Production-ready
-        </li>
-      </ul>
-      <p>
-        Check our GitHub project for more information about{' '}
-        <a href="https://github.com/ixartz/Next-js-Boilerplate">
-          Nextjs Boilerplate
-        </a>
-        . You can also browse our{' '}
-        <a href="https://creativedesignsguru.com/category/nextjs/">
-          Premium NextJS Templates
-        </a>{' '}
-        on our website to support this project.
-      </p>
+      <Center className={'m-3'}>
+        <img className={'max-h-40'} src={image} alt={'🥇 Gambar achievement'} />
+      </Center>
+      <Formik
+        initialValues={{ takarir: 'Si Paling Keren!', bahasa: 'ID' }}
+        onSubmit={async (values) => {
+          postQuery(values).then((res) => {
+            setImage(res);
+          });
+        }}
+      >
+        <Form>
+          <Field name={'takarir'}>
+            {({ field }: { field: any }) => {
+              return (
+                <FormControl className={'m-3'}>
+                  <FormLabel htmlFor={'takarir'}>Takarir</FormLabel>
+                  <Input
+                    {...field}
+                    id={'takarir'}
+                    type="text"
+                    placeholder={'Si Paling Primo Geovishap'}
+                  />
+                  <FormHelperText>
+                    Takarir untuk penamaan <i>achievement</i>
+                  </FormHelperText>
+                </FormControl>
+              );
+            }}
+          </Field>
+
+          <Field name={'bahasa'}>
+            {({ field }: { field: any }) => {
+              return (
+                <FormControl className={'m-3'}>
+                  <FormLabel htmlFor={'bahasa'}>Bahasa</FormLabel>
+                  <Select {...field} id={'bahasa'}>
+                    <option value="ID">Bahasa Indonesia</option>
+                    <option value="EN">Bahasa Inggris (English)</option>
+                  </Select>
+                  <FormHelperText>
+                    Bahasa <i>achievement</i>
+                  </FormHelperText>
+                </FormControl>
+              );
+            }}
+          </Field>
+          <Center>
+            <Button
+              className={'m-3'}
+              color={'white'}
+              _hover={{ bg: '#785E44' }}
+              backgroundColor={TITLE_COLOR}
+              type="submit"
+            >
+              Buat&nbsp; <i>achievement</i>
+            </Button>
+          </Center>
+        </Form>
+      </Formik>
     </Main>
   );
 };
