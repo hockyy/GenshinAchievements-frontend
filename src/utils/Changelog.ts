@@ -3,12 +3,12 @@ export const Changelog = {
     {
       emoji: '😳',
       version: '1.0.0',
-      changes: ['Membuat aplikasi dasar'],
+      changes: ['Membuat aplikasi dasar.'],
     },
     {
       emoji: '🍡',
       version: '1.1.0',
-      changes: ['Menambahkan bahasa Inggris'],
+      changes: ['Menambahkan bahasa Inggris;', 'mendukung perangkat seluler.'],
     },
   ],
 };

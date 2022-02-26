@@ -51,23 +51,27 @@ const Main = (props: IMainProps) => {
           <a href="https://hocky.id">Hocky</a> dan{' '}
           <a href="https://creativedesignsguru.com">CreativeDesignsGuru</a>
         </div>
-        <div className="text-sm text-center border-gray-300">
+        <div className="m-4 text-sm text-center border-gray-300">
           <div>
-            {Changelog.data.map((changeVersion, indexChanges) => {
-              return (
-                <div key={indexChanges} className={'m-4'}>
-                  {changeVersion.emoji}{' '}
-                  <b>
-                    Versi&nbsp;
-                    {changeVersion.version}
-                  </b>
-                  :
-                  {changeVersion.changes.map((change, indexVersion) => {
-                    return <li key={indexVersion}>{change}</li>;
-                  })}
-                </div>
-              );
-            })}
+            <b className={'text-lg'}>📝 Catatan Perubahan:</b>
+            {Changelog.data
+              .slice(0)
+              .reverse()
+              .map((changeVersion, indexChanges) => {
+                return (
+                  <div key={indexChanges} className={'m-2'}>
+                    {changeVersion.emoji}{' '}
+                    <b>
+                      Versi&nbsp;
+                      {changeVersion.version}
+                    </b>
+                    :
+                    {changeVersion.changes.map((change, indexVersion) => {
+                      return <li key={indexVersion}>{change}</li>;
+                    })}
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>
