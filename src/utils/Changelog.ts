@@ -15,5 +15,13 @@ export const Changelog = {
         'menambahkan informasi donasi.',
       ],
     },
+    {
+      emoji: '🥚',
+      version: '1.2.0',
+      changes: [
+        'Menggunakan Redis sebagai basis data',
+        'Optimisasi kecepatan pembuatan gambar',
+      ],
+    },
   ],
 };

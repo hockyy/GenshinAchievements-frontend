@@ -1,5 +1,6 @@
 export const Tips = [
   'Tips ini akan berganti setiap 10 detik!',
+  'Anda memiliki 60 detik sebelum gambar Anda dihapus dari basis data.',
   'Klik kanan dan pilih "Simpan Gambar Sebagai..." untuk menyimpan gambar <i>achievement</i>.',
   'Kamu bisa menggunakan hiragana juga, misalnya "ありがとう".',
   'Sebenarnya ini servernya menggunakan <i>Education Plan</i>.',
