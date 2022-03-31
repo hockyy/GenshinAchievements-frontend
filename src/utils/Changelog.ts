@@ -20,7 +20,7 @@ export const Changelog = {
       version: '1.2.0',
       changes: [
         'Menggunakan Redis sebagai basis data;',
-        'Optimisasi kecepatan pembuatan gambar.',
+        'optimisasi kecepatan pembuatan gambar.',
       ],
     },
   ],
