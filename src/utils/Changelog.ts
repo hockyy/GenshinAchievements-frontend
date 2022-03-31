@@ -19,8 +19,8 @@ export const Changelog = {
       emoji: '🥚',
       version: '1.2.0',
       changes: [
-        'Menggunakan Redis sebagai basis data',
-        'Optimisasi kecepatan pembuatan gambar',
+        'Menggunakan Redis sebagai basis data;',
+        'Optimisasi kecepatan pembuatan gambar.',
       ],
     },
   ],
